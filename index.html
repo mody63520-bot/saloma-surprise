@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Surprise for Saloma ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #fff5f8;
+    color: #49313d;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.screen {
+    display: none;
+    min-height: 100vh;
+    width: 100%;
+    padding: 25px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.screen.active {
+    display: flex;
+}
+
+.content {
+    width: 100%;
+    max-width: 600px;
+}
+
+.heart {
+    font-size: 45px;
+    color: #e77b9e;
+    margin-bottom: 20px;
+    animation: heartbeat 1.5s infinite;
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+}
+
+.label {
+    color: #e77b9e;
+    font-size: 11px;
+    letter-spacing: 4px;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: clamp(42px, 8vw, 70px);
+    margin-bottom: 15px;
+}
+
+h1 span {
+    color: #e77b9e;
+}
+
+.description {
+    color: #917582;
+    line-height: 2;
+    margin-bottom: 30px;
+    font-size: 14px;
+}
+
+/* Countdown */
+
+.countdown-title {
+    color: #917582;
+    font-size: 13px;
+    margin-bottom: 20px;
+}
+
+.countdown {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 30px;
+}
+
+.time-box {
+    background: white;
+    border: 1px solid #f7dce5;
+    border-radius: 15px;
+    padding: 15px 10px;
+    min-width: 75px;
+    box-shadow: 0 8px 25px #e77b9e12;
+}
+
+.time-box span {
+    display: block;
+    font-size: 27px;
+    font-weight: 600;
+    color: #e77b9e;
+}
+
+.time-box small {
+    display: block;
+    color: #a78c99;
+    font-size: 10px;
+    margin-top: 5px;
+}
+
+button {
+    border: none;
+    background: linear-gradient(135deg, #f5a2bb, #e77b9e);
+    color: white;
+    padding: 15px 30px;
+    border-radius: 50px;
+    font-family: inherit;
+    font-size: 14px;
+    cursor: pointer;
+    box-shadow: 0 10px 25px #e77b9e44;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: translateY(-4px);
+}
+
+#showMessageBtn {
+    display: none;
+    margin: 10px auto;
+}
+
+.small-note {
+    margin-top: 35px;
+    color: #b89ba7;
+    font-size: 11px;
+}
+
+/* Envelope */
+
+.envelope {
+    position: relative;
+    width: 230px;
+    height: 155px;
+    margin: 65px auto 45px;
+}
+
+.envelope-back {
+    position: absolute;
+    inset: 0;
+    background: #f3a3bc;
+}
+
+.letter {
+    position: absolute;
+    width: 190px;
+    height: 125px;
+    background: white;
+    left: 20px;
+    top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #e77b9e;
+    font-size: 13px;
+}
+
+.envelope-front {
+    position: absolute;
+    inset: 0;
+    background: #e989a8;
+    clip-path: polygon(0 100%, 50% 45%, 100% 100%);
+}
+
+.flap {
+    position: absolute;
+    inset: 0;
+    background: #f7b2c7;
+    clip-path: polygon(0 0, 100% 0, 50% 65%);
+    transform-origin: top center;
+}
+
+.envelope-heart {
+    position: absolute;
+    top: 55px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 25px;
+}
+
+/* Final Message */
+
+.card {
+    max-width: 620px;
+    width: 100%;
+    background: white;
+    padding: 40px 30px;
+    border-radius: 25px;
+    box-shadow: 0 20px 60px #965f781f;
+}
+
+.card h2 {
+    margin-bottom: 25px;
+    font-size: 30px;
+}
+
+.card h2 span {
+    color: #e77b9e;
+}
+
+.photo {
+    width: 230px;
+    height: 230px;
+    margin: 0 auto 30px;
+    padding: 7px;
+    background: #fff5f8;
+    border-radius: 18px;
+    transform: rotate(-2deg);
+}
+
+.photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.message {
+    color: #77616d;
+    font-size: 14px;
+    line-height: 2;
+}
+
+.message p {
+    margin-bottom: 17px;
+}
+
+.signature {
+    margin-top: 30px;
+    color: #a78c99;
+    font-size: 13px;
+}
+
+.signature h3 {
+    color: #e77b9e;
+    font-size: 25px;
+    margin-top: 5px;
+}
+
+.date {
+    margin-top: 25px;
+    color: #c5a8b5;
+    font-size: 11px;
+    letter-spacing: 4px;
+}
+
+@media(max-width: 480px) {
+    .card {
+        padding: 30px 18px;
+    }
+
+    .photo {
+        width: 200px;
+        height: 200px;
+    }
+
+    .message {
+        font-size: 13px;
+    }
+
+    .countdown {
+        gap: 7px;
+    }
+
+    .time-box {
+        min-width: 65px;
+        padding: 12px 5px;
+    }
+
+    .time-box span {
+        font-size: 23px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Welcome & Countdown -->
+<section class="screen active" id="welcome">
+    <div class="content">
+
+        <div class="heart">♥</div>
+
+        <p class="label">A LITTLE SURPRISE FOR YOU</p>
+
+        <h1>Hey, <span>Saloma!</span></h1>
+
+        <p class="description">
+            Something special is waiting for you.
+            <br>
+            Just a little more patience...
+        </p>
+
+        <div id="countdownArea">
+
+            <p class="countdown-title">
+                Your surprise will be ready in
+            </p>
+
+            <div class="countdown">
+
+                <div class="time-box">
+                    <span id="days">00</span>
+                    <small>Days</small>
+                </div>
+
+                <div class="time-box">
+                    <span id="hours">00</span>
+                    <small>Hours</small>
+                </div>
+
+                <div class="time-box">
+                    <span id="minutes">00</span>
+                    <small>Minutes</small>
+                </div>
+
+                <div class="time-box">
+                    <span id="seconds">00</span>
+                    <small>Seconds</small>
+                </div>
+
+            </div>
+
+        </div>
+
+        <button id="showMessageBtn" onclick="startSurprise()">
+            Show your message ♥
+        </button>
+
+        <p class="small-note">
+            Made with a little bit of love ♥
+        </p>
+
+    </div>
+</section>
+
+
+<!-- Envelope -->
+<section class="screen" id="envelopeScreen">
+    <div class="content">
+
+        <p class="label">A LETTER FOR YOU</p>
+
+        <h2>Something special is waiting...</h2>
+
+        <div class="envelope" id="envelope">
+
+            <div class="envelope-back"></div>
+            <div class="letter">For Saloma ♥</div>
+            <div class="envelope-front"></div>
+            <div class="flap" id="flap"></div>
+            <div class="envelope-heart">♥</div>
+
+        </div>
+
+        <button id="openBtn" onclick="openLetter()">
+            Open the letter ♥
+        </button>
+
+    </div>
+</section>
+
+
+<!-- Final Message -->
+<section class="screen" id="messageScreen">
+    <div class="content card">
+
+        <p class="label">A LITTLE MESSAGE FOR YOU</p>
+
+        <h2>Dear Saloma, <span>♥</span></h2>
+
+        <div class="photo">
+            <img src="us-together.jpg.jpeg" alt="Our childhood photo">
+        </div>
+
+        <div class="message">
+
+            <p>
+                Some people make ordinary days feel a little more special.
+                And you're definitely one of those people.
+            </p>
+
+            <p>
+                I just wanted to remind you that you're an amazing person,
+                and I'm genuinely glad our paths crossed.
+            </p>
+
+            <p>
+                Never lose that beautiful energy of yours.
+                Keep smiling, Saloma.
+                You deserve all the beautiful things life has to offer.
+            </p>
+
+        </div>
+
+        <div class="signature">
+            <p>With love,</p>
+            <h3>Hamody ♥</h3>
+        </div>
+
+        <p class="date">11 . 11 . 2026</p>
+
+    </div>
+</section>
+
+
+<script>
+
+// Countdown target: November 11, 2026 at 11:11 PM Egypt time
+const targetDate = new Date("2026-11-11T23:11:00+02:00").getTime();
+
+const countdownArea = document.getElementById("countdownArea");
+const showMessageBtn = document.getElementById("showMessageBtn");
+
+let countdownInterval;
+
+function updateCountdown() {
+
+    const now = Date.now();
+    const difference = targetDate - now;
+
+    if (difference <= 0) {
+
+        clearInterval(countdownInterval);
+
+        countdownArea.style.display = "none";
+        showMessageBtn.style.display = "inline-block";
+
+        if (typeof gsap !== "undefined") {
+            gsap.fromTo(showMessageBtn,
+                {
+                    opacity: 0,
+                    y: 20,
+                    scale: 0.8
+                },
+                {
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    duration: 1,
+                    ease: "back.out(1.7)"
+                }
+            );
+        }
+
+        return;
+    }
+
+    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((difference / (1000 * 60)) % 60);
+    const seconds = Math.floor((difference / 1000) % 60);
+
+    document.getElementById("days").textContent = String(days).padStart(2, "0");
+    document.getElementById("hours").textContent = String(hours).padStart(2, "0");
+    document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
+    document.getElementById("seconds").textContent = String(seconds).padStart(2, "0");
+
+}
+
+// Start countdown
+updateCountdown();
+countdownInterval = setInterval(updateCountdown, 1000);
+
+
+// Screen transition
+function switchScreen(from, to, callback) {
+
+    from.classList.remove("active");
+    to.classList.add("active");
+
+    if (typeof gsap !== "undefined") {
+
+        gsap.fromTo(to,
+            { opacity: 0, y: 20 },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 0.7,
+                onComplete: function() {
+                    if (callback) callback();
+                }
+            }
+        );
+
+    } else {
+
+        if (callback) callback();
+
+    }
+}
+
+
+// First button
+let busy = false;
+
+function startSurprise() {
+
+    if (busy) return;
+
+    busy = true;
+
+    const welcome = document.getElementById("welcome");
+    const envelope = document.getElementById("envelopeScreen");
+
+    switchScreen(welcome, envelope, function() {
+        busy = false;
+    });
+
+}
+
+
+// Open envelope
+function openLetter() {
+
+    if (busy) return;
+
+    busy = true;
+
+    const flap = document.getElementById("flap");
+    const envelope = document.getElementById("envelope");
+
+    const oldScreen = document.getElementById("envelopeScreen");
+    const newScreen = document.getElementById("messageScreen");
+
+    if (typeof gsap !== "undefined") {
+
+        const timeline = gsap.timeline({
+            onComplete: function() {
+
+                switchScreen(oldScreen, newScreen, function() {
+                    busy = false;
+                });
+
+            }
+        });
+
+        timeline.to(flap, {
+            rotateX: 180,
+            duration: 0.7
+        });
+
+        timeline.to(envelope, {
+            scale: 0.7,
+            opacity: 0,
+            duration: 0.6
+        });
+
+    } else {
+
+        switchScreen(oldScreen, newScreen, function() {
+            busy = false;
+        });
+
+    }
+
+}
+
+console.log("Saloma Surprise loaded successfully ❤️");
+
+</script>
+
+</body>
+</html>
+```
